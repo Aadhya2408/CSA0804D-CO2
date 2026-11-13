@@ -1,0 +1,9 @@
+def verify_with_security(correct, answer, entries, sec_entries):
+    if verify_otp_while(correct, entries) == 'VERIFIED':
+        return 'VERIFIED'
+    for chance in range(2):                  # 2 extra attempts
+        if sec_entries[chance].strip().lower() == answer:
+            return 'VERIFIED via security question'
+    return 'LOCKED for 30 minutes'
+
+print(verify_with_security('4821', 'chennai', ['1', '2', '3'], ['madurai', 'Chennai']))
