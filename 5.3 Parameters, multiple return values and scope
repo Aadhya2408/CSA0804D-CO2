@@ -1,0 +1,28 @@
+def place_order(item, qty=1, *, takeaway=False):   # item: positional; qty: default; takeaway: keyword-only
+    price = {'Dosa': 40, 'Idli': 25, 'Tea': 10}[item]
+    total = price * qty
+    gst = round(total * 0.05, 2)
+    return total, gst                   # a tuple
+
+total, gst = place_order('Dosa', 2, takeaway=True)   # unpack
+
+print(total, gst)                       # 80 4.0
+print(place_order(qty=3, item='Tea'))   # keyword arguments in any order -> (30, 1.5)
+
+bills_issued = 0                        # global
+def next_bill():
+    global bills_issued                 # needed to REBIND a global
+
+    bills_issued += 1
+    return bills_issued
+
+def make_counter():
+    count = 0
+    def tick():
+        nonlocal count                  # rebinds the enclosing function's variable
+        count += 1
+        return count
+    return tick
+
+c = make_counter()
+print(next_bill(), next_bill(), c(), c())   # 1 2 1 2
