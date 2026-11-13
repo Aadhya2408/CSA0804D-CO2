@@ -1,0 +1,7 @@
+def verify_recursive(correct, it, left=3):
+    if left == 0:
+        return 'LOCKED'
+    code = next(it, '').strip()
+    if code == '':
+        return verify_recursive(correct, it, left)      # blank: recurse WITHOUT using an attempt
+    return 'VERIFIED' if code == correct else verify_recursive(correct, it, left - 1)
