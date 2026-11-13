@@ -1,0 +1,11 @@
+def add_item(item, order=None):
+    if order is None:      # a fresh list is created on every call
+        order = []
+    order.append(item)
+    return order
+
+print(add_item('Dosa'))    # ['Dosa']
+print(add_item('Idli'))    # ['Idli']
+my_order = add_item('Tea') # ['Tea']
+add_item('Vada', my_order) # ['Tea', 'Vada'] (caller-supplied list is extended on purpose)
+print(add_item.__defaults__) # (None,)
