@@ -1,0 +1,15 @@
+def verify_otp_for(correct, entries):
+    it = iter(entries)
+    for attempt in range(3):
+        code = next(it, '').strip()
+        while code == '':                  # blank handled by an inner loop, because
+            code = next(it, 'x').strip()    # `continue` in the for loop would WASTE an attempt
+        if code == 'x':
+            pass                            # placeholder: 'pass' does nothing (shown for demonstration)
+        if code == correct:
+            print(f'Verified on attempt {attempt + 1}')
+            break
+    else:
+        print('LOCKED for 30 minutes')      # for-else: no break happened
+
+verify_otp_for('4821', ['9', '', '8', '4821'])
